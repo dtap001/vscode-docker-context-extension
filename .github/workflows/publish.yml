@@ -26,11 +26,8 @@ jobs:
       - name: Compile TypeScript
         run: npm run compile
 
-      - name: Install vsce
-        run: npm install -g vsce
-
       - name: Package extension
-        run: vsce package
+        run: npx vsce package
 
       - name: Move VSIX to assets
         run: mv *.vsix assets/local/
