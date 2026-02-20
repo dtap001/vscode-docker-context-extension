@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
     100
   );
 
-  statusBarItem.text = '🐳 Docker: …';
+  statusBarItem.text = '🐳 Docker Context: …';
   statusBarItem.tooltip = 'Switch Docker context';
   statusBarItem.command = 'dockerContext.switch';
   statusBarItem.show();
