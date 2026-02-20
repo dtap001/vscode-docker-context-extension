@@ -35,11 +35,21 @@ jobs:
       - name: Move VSIX to assets
         run: mv *.vsix assets/local/
 
-      - name: Create GitHub Release
+      - name: Get version
+        id: version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Create git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag v${{ steps.version.outputs.version }}
+          git push origin v${{ steps.version.outputs.version }}
+
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
           files: assets/local/*.vsix
-          draft: true
-          tag_name: draft-${{ github.run_number }}
+          tag_name: v${{ steps.version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
