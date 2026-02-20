@@ -2,7 +2,7 @@
   "name": "docker-context-status",
   "displayName": "Docker Context Status",
   "description": "Shows current Docker context in the VS Code status bar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "valix",
   "repository": {
     "type": "git",
@@ -12,11 +12,11 @@
     "vscode": "^1.80.0"
   },
   "categories": [
-      "Visualization"
+    "Visualization"
   ],
   "activationEvents": [
-  "onStartupFinished",
-  "onCommand:dockerContext.switch"
+    "onStartupFinished",
+    "onCommand:dockerContext.switch"
   ],
   "main": "./out/extension.js",
   "contributes": {},
