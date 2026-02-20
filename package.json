@@ -1,0 +1,28 @@
+{
+  "name": "docker-context-status",
+  "displayName": "Docker Context Status",
+  "description": "Shows current Docker context in the VS Code status bar",
+  "version": "0.0.1",
+  "publisher": "valix",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "icon": "./assets/local/icon.png",
+  "categories": [
+      "Visualization"
+  ],
+  "activationEvents": [
+  "onStartupFinished",
+  "onCommand:dockerContext.switch"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {},
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0"
+  }
+}
