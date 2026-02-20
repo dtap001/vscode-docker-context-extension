@@ -2,14 +2,14 @@ import * as vscode from 'vscode';
 import { exec } from 'child_process';
 
 let statusBarItem: vscode.StatusBarItem;
-
+const statusBarTextPrefix = '🐳 Docker Context: ';
 export function activate(context: vscode.ExtensionContext) {
   statusBarItem = vscode.window.createStatusBarItem(
     vscode.StatusBarAlignment.Left,
     100
   );
 
-  statusBarItem.text = '🐳 Docker Context: …';
+  statusBarItem.text = `${statusBarTextPrefix}…`;
   statusBarItem.tooltip = 'Switch Docker context';
   statusBarItem.command = 'dockerContext.switch';
   statusBarItem.show();
@@ -30,11 +30,11 @@ export function activate(context: vscode.ExtensionContext) {
 function updateDockerContext() {
   exec('docker context show', (error: any, stdout: string) => {
     if (error) {
-      statusBarItem.text = '🐳 Docker: n/a';
+      statusBarItem.text = `${statusBarTextPrefix}n/a`;
       return;
     }
 
-    statusBarItem.text = `🐳 Docker: ${stdout.trim()}`;
+    statusBarItem.text = `${statusBarTextPrefix}${stdout.trim()}`;
   });
 }
 
