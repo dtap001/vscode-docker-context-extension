@@ -35,14 +35,6 @@ jobs:
       - name: Move VSIX to assets
         run: mv *.vsix assets/local/
 
-      - name: Commit and push
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/local/
-          git commit -m "Build: update VSIX file" || true
-          git push
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
