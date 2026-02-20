@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   bump:
-    if: github.actor != 'github-actions[bot]'
+    if: "!startsWith(github.event.head_commit.message, 'chore: bump version')"
     runs-on: ubuntu-latest
 
     steps:
