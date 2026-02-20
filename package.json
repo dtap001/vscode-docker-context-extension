@@ -2,7 +2,7 @@
   "name": "docker-context-status",
   "displayName": "Docker Context Status",
   "description": "Shows current Docker context in the VS Code status bar",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "publisher": "valix",
   "repository": {
     "type": "git",
