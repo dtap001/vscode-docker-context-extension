@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Bump version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version patch -m "chore: bump version to %s"
+
       - name: Compile TypeScript
         run: npm run compile
 
@@ -40,11 +46,6 @@ jobs:
       - name: Move VSIX to assets
         run: mv *.vsix assets/local/
 
-      - name: Bump version
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm version patch -m "chore: bump version to %s"
 
       - name: Get version
         id: version
