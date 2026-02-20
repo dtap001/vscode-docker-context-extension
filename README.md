@@ -1,4 +1,4 @@
-# Docker Context Status Bar
+# Docker Context Status Bar 🦄
 
 A lightweight Visual Studio Code extension that shows your **current Docker context** in the VS Code **status bar**, with the ability to **switch contexts with a single click**.
 
