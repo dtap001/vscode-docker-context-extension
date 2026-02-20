@@ -29,6 +29,9 @@ jobs:
       - name: Package extension
         run: npx vsce package
 
+      - name: Create assets directory
+        run: mkdir -p assets/local
+
       - name: Move VSIX to assets
         run: mv *.vsix assets/local/
 
