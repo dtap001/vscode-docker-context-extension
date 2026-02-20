@@ -11,13 +11,15 @@ permissions:
 
 jobs:
   build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -32,7 +34,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          npm version patch -m "chore: bump version to %s"
+          npm version patch --no-verify -m "chore: bump version to %s"
+          git push origin HEAD --follow-tags
 
       - name: Compile TypeScript
         run: npm run compile
@@ -40,28 +43,9 @@ jobs:
       - name: Package extension
         run: npx vsce package
 
-      - name: Create assets directory
-        run: mkdir -p assets/local
-
-      - name: Move VSIX to assets
-        run: mv *.vsix assets/local/
-
-
-      - name: Get version
-        id: version
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
-
-      - name: Create git tag
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag v${{ steps.version.outputs.version }}
-          git push origin v${{ steps.version.outputs.version }}
-
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: assets/local/*.vsix
-          tag_name: v${{ steps.version.outputs.version }}
+          files: "*.vsix"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
